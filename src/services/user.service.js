@@ -2,35 +2,33 @@
 import { User } from "../models/index.js";
 import { ApiError } from "../utils/index.js";
 
-export default class UserService {
-    static async getProfile(userId) {
-        const user = await User.findById(userId).select("-password -refreshToken");
-        if (!user) {
-            throw new ApiError(404, "User not found");
+export async function getProfile(userId) {
+    const user = await User.findById(userId).select("-password -refreshToken");
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+    return user;
+}
+
+export async function updateProfile(userId, updateData) {
+    const allowedFields = ["name", "phone", "language_preference"];
+    const updates = {};
+
+    for (let field of allowedFields) {
+        if (updateData[field] !== undefined) {
+            updates[field] = updateData[field];
         }
-        return user;
     }
 
-    static async updateProfile(userId, updateData) {
-        const allowedFields = ["name", "phone", "language_preference"];
-        const updates = {};
+    const user = await User.findByIdAndUpdate(
+        userId,
+        { $set: updates },
+        { new: true, runValidators: true }
+    ).select("-password -refreshToken");
 
-        for (let field of allowedFields) {
-            if (updateData[field] !== undefined) {
-                updates[field] = updateData[field];
-            }
-        }
-
-        const user = await User.findByIdAndUpdate(
-            userId,
-            { $set: updates },
-            { new: true, runValidators: true }
-        ).select("-password -refreshToken");
-
-        if (!user) {
-            throw new ApiError(404, "User not found");
-        }
-
-        return user;
+    if (!user) {
+        throw new ApiError(404, "User not found");
     }
+
+    return user;
 }

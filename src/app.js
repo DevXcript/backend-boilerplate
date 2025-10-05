@@ -12,7 +12,7 @@ import { env } from "./config/index.js";
 
 const app = express();
 
-const allowedOrigins = (process.env.CORS_ORIGINS || process.env.CLIENT_URL || process.env.ADMIN_URL || "")
+const allowedOrigins = (env.CORS_ORIGINS || env.CLIENT_URL || env.ADMIN_URL || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean)
@@ -41,7 +41,7 @@ app.use(xssClean());
 // mongoSanitize → block database injection
 app.use(mongoSanitize());
 
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser(env.COOKIE_SECRET));
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
@@ -56,7 +56,7 @@ if (env.NODE_ENV === "development") {
     }
 }
 
-if (env.NODE_ENV === "production" || process.env.TRUST_PROXY === "1") {
+if (env.NODE_ENV === "production" || env.TRUST_PROXY === "1") {
     app.set("trust proxy", 1);
 }
 

@@ -1,27 +1,29 @@
-#  Backend Starter Template
+# Backend Starter Template
 
-##  What's Inside?
+Production-ready Node.js/Express backend with MongoDB, JWT authentication, validation, and security. Clean architecture with clear module boundaries and centralized index-based imports.
 
- **Authentication System**
-- JWT access & refresh tokens
+## What's Inside?
+
+Authentication System
+- JWT access and refresh tokens
 - Password hashing with bcrypt
 - Cookie-based secure storage
-- Role-based access (client/consultant/admin)
+- Role-based access (client, consultant, admin)
 
- **Security Features**
-- Rate limiting (100 requests/15min)
+Security Features
+- Rate limiting (100 requests per 15 minutes)
 - CORS protection
 - XSS protection
 - Helmet security headers
 - Input validation with Joi
 
- **Clean Architecture**
+Clean Architecture
 - Layered structure (models → services → controllers → routes)
 - Centralized error handling
 - Modular middleware system
 - Environment configuration
 
- **Database Ready**
+Database Ready
 - MongoDB with Mongoose
 - Connection pooling
 - Graceful shutdown
@@ -36,7 +38,7 @@ cd backend-starter-template
 npm install
 ```
 
-### 2️ Create Environment
+### 2) Create Environment
 ```bash
 # Create .env file
 MONGO_URI=mongodb://localhost:27017/your-database
@@ -46,14 +48,14 @@ COOKIE_SECRET=your-cookie-secret
 PORT=5000
 ```
 
-### 3️ Run That Shit! 
+### 3) Run locally
 ```bash
 npm run dev
 ```
 
-##  API Endpoints
+## API Endpoints
 
-###  Authentication
+### Authentication
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
 | `POST` | `/api/v1/users/register` |  Sign up |  |
@@ -61,18 +63,18 @@ npm run dev
 | `POST` | `/api/v1/users/refresh-token` |  Refresh token |  |
 | `POST` | `/api/v1/users/logout` |  Sign out |  |
 
-### 👤 User Management
+### User Management
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
 | `GET` | `/api/v1/users/profile` |  Get profile |  |
 | `PUT` | `/api/v1/users/profile` |  Update profile |  |
 
-###  Health Check
+### Health Check
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/api/v1/health` |  Server status |
 
-##  Tech Stack
+## Tech Stack
 
 | Category | Technology |
 |----------|------------|
@@ -84,7 +86,7 @@ npm run dev
 |  **Security** | Helmet, XSS-Clean, CORS |
 |  **Encryption** | bcrypt |
 
-##  Project Structure
+## Project Structure
 
 ```
 src/
@@ -100,7 +102,7 @@ src/
 └──  server.js       # Server entry point
 ```
 
-##  Development Commands
+## Development Commands
 
 ```bash
  npm run dev     
@@ -108,9 +110,9 @@ src/
  npm run lint    
 ```
 
-##  Example Usage
+## Example Usage
 
-###  Register User
+### Register User
 ```bash
 curl -X POST http://localhost:8000/api/v1/users/register \
   -H "Content-Type: application/json" \
@@ -122,7 +124,7 @@ curl -X POST http://localhost:8000/api/v1/users/register \
   }'
 ```
 
-###  Login
+### Login
 ```bash
 curl -X POST http://localhost:8000/api/v1/users/login \
   -H "Content-Type: application/json" \
@@ -132,7 +134,7 @@ curl -X POST http://localhost:8000/api/v1/users/login \
   }'
 ```
 
-##  Adding New Features
+## Adding New Features
 
 1.  **Model**: Create in `src/models/`
 2.  **Validation**: Add schema in `src/validations/`
@@ -141,9 +143,9 @@ curl -X POST http://localhost:8000/api/v1/users/login \
 5.  **Routes**: Define endpoints in `src/routes/`
 6.  **Export**: Update index files
 
-##  Production Deployment
+## Production Deployment
 
-###  Environment Variables
+### Environment Variables
 ```env
 NODE_ENV=production
 MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/db
@@ -152,7 +154,7 @@ JWT_REFRESH_SECRET=another-strong-secret
 COOKIE_SECRET=cookie-secret-key
 ```
 
-###  Production Checklist
+### Production Checklist
 - [ ]  Set strong JWT secrets
 - [ ]  Use MongoDB Atlas or secured MongoDB
 - [ ]  Enable HTTPS
@@ -160,7 +162,7 @@ COOKIE_SECRET=cookie-secret-key
 - [ ]  Set up logging & monitoring
 - [ ]  Use process manager (PM2)
 
-##  Contributing
+## Contributing
 
 1.  Fork the repo
 2.  Create feature branch (`git checkout -b feature/cool-stuff`)
@@ -168,7 +170,13 @@ COOKIE_SECRET=cookie-secret-key
 4.  Push branch (`git push origin feature/cool-stuff`)
 5.  Create Pull Request
 
-##  License
+## Contact
+
+- Email: daniyalsohaildev@gmail.com
+- Website: https://daniyalsohail.me
+- LinkedIn: https://www.linkedin.com/in/mdaniyal-sohail/
+
+## License
 
  ISC License - feel free to use this shit however you want!
 

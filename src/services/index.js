@@ -1,13 +1,7 @@
-
-import AuthService from "./auth.service.js";
-import UserService from "./user.service.js";
+import * as authService from "./auth.service.js";
+import * as userService from "./user.service.js";
 
 export {
-    AuthService,
-    UserService
-};
-
-export default {
-    AuthService,
-    UserService
+    authService,
+    userService
 };

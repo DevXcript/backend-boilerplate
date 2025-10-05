@@ -3,10 +3,11 @@ import dotenv from "dotenv";
 import app from "./app.js";
 import { connectDB } from "./config/db.config.js";
 import mongoose from "mongoose";
+import { env } from "./config/index.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = env.PORT || 5000;
 
 const startServer = async () => {
     try {
@@ -14,7 +15,7 @@ const startServer = async () => {
 
         const server = app.listen(PORT, () => {
             console.log(` Server running at http://localhost:${PORT}`);
-            console.log(` Environment: ${process.env.NODE_ENV}`);
+            console.log(` Environment: ${env.NODE_ENV}`);
         });
 
 

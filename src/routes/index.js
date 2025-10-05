@@ -1,5 +1,6 @@
 import express from "express";
 import userRoutes from "./user.routes.js";
+import { env } from "../config/index.js";
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get("/health", (req, res) => {
     res.json({
         status: "API is running",
         timestamp: new Date().toISOString(),
-        environment: process.env.NODE_ENV || "development"
+        environment: env.NODE_ENV || "development"
     });
 });
 
