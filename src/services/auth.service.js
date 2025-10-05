@@ -1,25 +1,22 @@
 
 import { User } from "../models/index.js";
-import { hashPassword, comparePassword, hashRefreshToken, compareRefreshToken } from "../helper/auth.helper.js";
+import { comparePassword, hashRefreshToken, compareRefreshToken } from "../helper/auth.helper.js";
 import jwt from "jsonwebtoken";
 import { ApiError } from "../utils/index.js";
 import { env } from "../config/index.js";
 
-export async function registerUser({ name, email, password, user_type, phone, language_preference }) {
-    const existingUser = await User.findOne({ email });
+export async function registerUser({ fullName, userName, email, password }) {
+    const existingUser = await User.findOne({ $or: [{ email }, { userName }] });
     if (existingUser) {
-        throw new ApiError(400, "User already exists");
+        throw new ApiError(400, "User with this email or username already exists");
     }
 
-    const hashedPassword = await hashPassword(password);
-
     const user = await User.create({
-        name,
+        fullName,
+        userName,
         email,
-        password: hashedPassword,
-        user_type,
-        phone,
-        language_preference,
+        password,
+
     });
 
     return { user };

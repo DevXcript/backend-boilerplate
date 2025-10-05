@@ -2,31 +2,18 @@ import Joi from "joi";
 
 // User profile update validation
 export const updateProfileSchema = Joi.object({
-    name: Joi.string()
+    fullName: Joi.string()
         .trim()
         .min(2)
         .max(50)
-        .optional()
-        .messages({
-            'string.min': 'Name must be at least 2 characters long',
-            'string.max': 'Name cannot exceed 50 characters'
-        }),
+        .optional(),
 
-    phone: Joi.string()
+    userName: Joi.string()
         .trim()
-        .pattern(new RegExp('^[+]?[1-9]\\d{1,14}$'))
-        .optional()
-        .allow('')
-        .messages({
-            'string.pattern.base': 'Please provide a valid phone number'
-        }),
-
-    language_preference: Joi.string()
-        .valid('english', 'spanish', 'french')
-        .optional()
-        .messages({
-            'any.only': 'Language preference must be one of: english, spanish, french'
-        })
+        .lowercase()
+        .min(3)
+        .max(30)
+        .optional(),
 });
 
 // User ID validation (for params)

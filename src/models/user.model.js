@@ -5,10 +5,17 @@ import { hashPassword, comparePassword } from "../helper/auth.helper.js";
 
 const userSchema = new mongoose.Schema(
     {
-        name: {
+        fullName: {
             type: String,
-            required: [true, "Name is required"],
+            required: [true, "Full name is required"],
             trim: true,
+        },
+        userName: {
+            type: String,
+            required: [true, "Username is required"],
+            unique: true,
+            trim: true,
+            lowercase: true,
         },
         email: {
             type: String,
@@ -32,16 +39,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             enum: ["client", "consultant", "admin"],
             default: "client",
-        },
-        phone: {
-            type: String,
-            trim: true,
-        },
-        language_preference: {
-            type: String,
-            enum: ["english", "spanish", "french"],
-            default: "english",
-        },
+        }
     },
     { timestamps: true }
 );

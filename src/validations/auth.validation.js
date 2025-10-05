@@ -2,15 +2,27 @@ import Joi from "joi";
 
 // User registration validation
 export const registerSchema = Joi.object({
-    name: Joi.string()
+    fullName: Joi.string()
         .trim()
         .min(2)
         .max(50)
         .required()
         .messages({
-            'string.empty': 'Name is required',
-            'string.min': 'Name must be at least 2 characters long',
-            'string.max': 'Name cannot exceed 50 characters'
+            'string.empty': 'Full name is required',
+            'string.min': 'Full name must be at least 2 characters long',
+            'string.max': 'Full name cannot exceed 50 characters'
+        }),
+
+    userName: Joi.string()
+        .trim()
+        .lowercase()
+        .min(3)
+        .max(30)
+        .required()
+        .messages({
+            'string.empty': 'Username is required',
+            'string.min': 'Username must be at least 3 characters long',
+            'string.max': 'Username cannot exceed 30 characters'
         }),
 
     email: Joi.string()
@@ -34,27 +46,11 @@ export const registerSchema = Joi.object({
             'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, and one number',
             'string.empty': 'Password is required'
         }),
-
     user_type: Joi.string()
         .valid('client', 'consultant', 'admin')
         .default('client')
         .messages({
             'any.only': 'User type must be one of: client, consultant, admin'
-        }),
-
-    phone: Joi.string()
-        .trim()
-        .pattern(new RegExp('^[+]?[1-9]\\d{1,14}$'))
-        .optional()
-        .messages({
-            'string.pattern.base': 'Please provide a valid phone number'
-        }),
-
-    language_preference: Joi.string()
-        .valid('english', 'spanish', 'french')
-        .default('english')
-        .messages({
-            'any.only': 'Language preference must be one of: english, spanish, french'
         })
 });
 

@@ -11,7 +11,7 @@ export async function getProfile(userId) {
 }
 
 export async function updateProfile(userId, updateData) {
-    const allowedFields = ["name", "phone", "language_preference"];
+    const allowedFields = ["fullName", "userName"];
     const updates = {};
 
     for (let field of allowedFields) {

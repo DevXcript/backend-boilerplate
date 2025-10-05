@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import xssClean from "xss-clean";
-import mongoSanitize from "express-mongo-sanitize";
+// custom sanitizer to avoid modifying req.query setter
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
@@ -36,10 +35,10 @@ app.use(
 
 // helmet → browser protection via headers.
 app.use(helmet());
-// xssClean → block JavaScript injection.
-app.use(xssClean());
-// mongoSanitize → block database injection
-app.use(mongoSanitize());
+// XSS protection handled via Helmet and validation middleware
+// sanitize → strip $ and . from input keys to prevent Mongo operator injection
+import { sanitize } from "./middlewares/index.js";
+app.use(sanitize);
 
 app.use(cookieParser(env.COOKIE_SECRET));
 app.use(express.json({ limit: "10kb" }));

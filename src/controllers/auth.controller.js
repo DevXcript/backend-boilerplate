@@ -4,18 +4,19 @@ import { env } from "../config/index.js";
 
 // Register
 export const register = async (req, res) => {
-    const { name, email, password, user_type, phone, language_preference } = req.body;
+    const { fullName, userName, email, password, user_type } = req.body;
 
     try {
         const result = await authService.registerUser({
-            name, email, password, user_type, phone, language_preference
+            fullName, userName, email, password, user_type
         });
 
         res.status(201).json(
             new ApiResponse(201, {
                 user: {
                     id: result.user._id,
-                    name: result.user.name,
+                    fullName: result.user.fullName,
+                    userName: result.user.userName,
                     email: result.user.email,
                     user_type: result.user.user_type,
                 }
@@ -51,7 +52,8 @@ export const login = async (req, res) => {
             new ApiResponse(200, {
                 user: {
                     id: user._id,
-                    name: user.name,
+                    fullName: user.fullName,
+                    userName: user.userName,
                     email: user.email,
                     user_type: user.user_type,
                 },

@@ -1,10 +1,12 @@
 import express from "express";
 import userRoutes from "./user.routes.js";
+import authRoutes from "./auth.routes.js";
 import { env } from "../config/index.js";
 
 const router = express.Router();
 
-// Mount user routes
+// Mount routes
+router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
 
 // Health check route
