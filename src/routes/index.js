@@ -5,11 +5,9 @@ import { env } from "../config/index.js";
 
 const router = express.Router();
 
-// Mount routes
 router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
 
-// Health check route
 router.get("/health", (req, res) => {
     res.json({
         status: "API is running",

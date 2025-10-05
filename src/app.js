@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-// custom sanitizer to avoid modifying req.query setter
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
@@ -33,10 +32,7 @@ app.use(
     })
 );
 
-// helmet → browser protection via headers.
 app.use(helmet());
-// XSS protection handled via Helmet and validation middleware
-// sanitize → strip $ and . from input keys to prevent Mongo operator injection
 import { sanitize } from "./middlewares/index.js";
 app.use(sanitize);
 

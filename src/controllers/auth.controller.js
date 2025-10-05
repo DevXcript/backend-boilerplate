@@ -4,11 +4,11 @@ import { env } from "../config/index.js";
 
 // Register
 export const register = async (req, res) => {
-    const { fullName, userName, email, password, user_type } = req.body;
+    const { fullName, userName, email, password } = req.body;
 
     try {
         const result = await authService.registerUser({
-            fullName, userName, email, password, user_type
+            fullName, userName, email, password
         });
 
         res.status(201).json(
@@ -18,7 +18,6 @@ export const register = async (req, res) => {
                     fullName: result.user.fullName,
                     userName: result.user.userName,
                     email: result.user.email,
-                    user_type: result.user.user_type,
                 }
             }, "Registration successful")
         );
@@ -55,7 +54,6 @@ export const login = async (req, res) => {
                     fullName: user.fullName,
                     userName: user.userName,
                     email: user.email,
-                    user_type: user.user_type,
                 },
                 accessToken,
                 refreshToken,

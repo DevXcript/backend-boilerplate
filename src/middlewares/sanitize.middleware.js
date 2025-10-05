@@ -25,7 +25,6 @@ function deepSanitize(obj) {
 }
 
 export function sanitize(req, _res, next) {
-    // mutate in-place to avoid reassigning req.query/req.params
     if (req.body) deepSanitize(req.body);
     if (req.params) deepSanitize(req.params);
     if (req.query) deepSanitize(req.query);

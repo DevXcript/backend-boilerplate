@@ -5,7 +5,6 @@ import { updateProfileSchema } from "../validations/index.js";
 
 const router = express.Router();
 
-// User profile routes with validation
 router.get("/profile", auth, userController.getProfile);
 router.put("/profile", auth, validateBody(updateProfileSchema), userController.updateProfile);
 
