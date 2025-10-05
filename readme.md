@@ -56,18 +56,18 @@ npm run dev
 ## API Endpoints
 
 ### Authentication
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `POST` | `/api/v1/users/register` |  Sign up |  |
-| `POST` | `/api/v1/users/login` |  Sign in |  |
-| `POST` | `/api/v1/users/refresh-token` |  Refresh token |  |
-| `POST` | `/api/v1/users/logout` |  Sign out |  |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/v1/auth/register` | Register user |
+| `POST` | `/api/v1/auth/login` | Login user |
+| `POST` | `/api/v1/auth/refresh-token` | Refresh access token |
+| `POST` | `/api/v1/auth/logout` | Logout user |
 
 ### User Management
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `GET` | `/api/v1/users/profile` |  Get profile |  |
-| `PUT` | `/api/v1/users/profile` |  Update profile |  |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/v1/users/profile` | Get own profile |
+| `PUT` | `/api/v1/users/profile` | Update own profile |
 
 ### Health Check
 | Method | Endpoint | Description |
@@ -114,23 +114,40 @@ src/
 
 ### Register User
 ```bash
-curl -X POST http://localhost:8000/api/v1/users/register \
+curl -X POST http://localhost:5000/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
+    "fullName": "John Doe",
+    "userName": "john_doe",
     "email": "john@example.com", 
     "password": "SecurePass123",
-    "user_type": "client"
   }'
 ```
 
 ### Login
 ```bash
-curl -X POST http://localhost:8000/api/v1/users/login \
+curl -X POST http://localhost:5000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
     "password": "SecurePass123"
+  }'
+```
+
+### Get Profile (requires auth)
+```bash
+curl -X GET http://localhost:5000/api/v1/users/profile \
+  -H "Authorization: Bearer <ACCESS_TOKEN>"
+```
+
+### Update Profile (requires auth)
+```bash
+curl -X PUT http://localhost:5000/api/v1/users/profile \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <ACCESS_TOKEN>" \
+  -d '{
+    "fullName": "John Updated",
+    "userName": "john_updated"
   }'
 ```
 
